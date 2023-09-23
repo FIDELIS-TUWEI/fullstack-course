@@ -24,6 +24,9 @@ const App = () => {
   // function to calculate total stats
   const total = good + neutral + bad;
 
+  // function to calculate positive feedback
+  const positiveFeedback = (good / total) * 100;
+
   return (
     <div>
       <h2>Give feedback</h2>
@@ -35,10 +38,11 @@ const App = () => {
       </div>
 
       <h3>Statistics</h3>
-      <p>Good {good}</p>
-      <p>Neutral {neutral}</p>
-      <p>Bad {bad}</p>
-      <p>Total Stats {total}</p>
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
+      <p>Total Stats: {total}</p>
+      <p>Positive Feedback = {positiveFeedback} %</p>
     </div>
   )
 }
