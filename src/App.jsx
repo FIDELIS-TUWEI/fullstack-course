@@ -27,7 +27,7 @@ const App = () => {
   // function to calculate positive feedback
   const positiveFeedback = (good / total) * 100;
 
-  // function to calculate combined average score
+  // function to calculate combined average score (good: 1, neutral: 0, bad: -1)
   const combinedAverage = 
     total > 0 ? (good * 1 + neutral * 0 + bad * -1) / total : 0;
 
