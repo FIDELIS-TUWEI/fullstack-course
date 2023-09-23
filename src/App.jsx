@@ -35,12 +35,45 @@ const App = () => {
     setVotes(newVotes)
   }
 
+  // function to display anecdote with the largest votes
+  const anecdoteWithMostVotes = () => {
+    let maxVotes = -1;
+    let maxIndex = -1;
+
+    for (let i =0; i < votes.length; i++) {
+      if (votes[i] > maxVotes) {
+        maxVotes = votes[i];
+        maxIndex = i;
+      }
+    }
+
+    if (maxIndex !== -1) {
+      return {
+        text: anecdotes[maxIndex],
+        votes: maxVotes
+      };
+    }
+
+    return {
+      text: "No Votes submitted yet.",
+      votes: 0
+    }
+  }
+
+  const mostVotedAnecdote = anecdoteWithMostVotes();
+
   return (
     <div>
+      <h4>Anecdote of the day</h4>
       <p>{anecdotes[selected]}</p>
       <p>Has {votes[selected]} votes</p>
       <button onClick={handleVote}>Vote</button>
       <button onClick={getRandomAnecdote}>next anecdote</button>
+
+
+      <h4>AnecDote with most votes</h4>
+      <p>{mostVotedAnecdote.text}</p>
+      <p>Has Total of {mostVotedAnecdote.votes} votes</p>
     </div>
   )
 }
