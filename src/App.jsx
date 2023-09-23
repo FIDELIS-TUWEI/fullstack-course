@@ -24,8 +24,15 @@ const App = () => {
   // function to calculate total stats
   const total = good + neutral + bad;
 
+  // function to calculate average feedback
+  const averageFeedback = (neutral / total) * 100;
+
   // function to calculate positive feedback
   const positiveFeedback = (good / total) * 100;
+
+  // function to calculate combined average score
+  const combinedAverage = 
+    total > 0 ? (good * 1 + neutral * 0 + bad * -1) / total : 0;
 
   return (
     <div>
@@ -42,6 +49,7 @@ const App = () => {
       <p>Neutral: {neutral}</p>
       <p>Bad: {bad}</p>
       <p>Total Stats: {total}</p>
+      <p>Average Feedback = {combinedAverage} %</p>
       <p>Positive Feedback = {positiveFeedback} %</p>
     </div>
   )
