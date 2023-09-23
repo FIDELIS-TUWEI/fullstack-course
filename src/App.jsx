@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useState } from "react"
 
 
 const App = () => {
@@ -12,9 +14,23 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
 
+  const [selected, setSelected] = useState(0);
+
+  // function to generate a random anecdote
+  const getRandomAnecdote = () => {
+    const randomIndex = Math.floor(Math.random() * anecdotes.length);
+    setSelected(randomIndex)
+  };
+
+  // useeffect hook
+  useEffect(() => {
+    getRandomAnecdote()
+  }, []);
+
   return (
     <div>
-      
+      {anecdotes[selected]}
+      <button onClick={getRandomAnecdote}>next anecdote</button>
     </div>
   )
 }
