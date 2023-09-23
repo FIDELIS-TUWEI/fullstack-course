@@ -21,6 +21,9 @@ const App = () => {
     setBad(bad + 1)
   };
 
+  // function to calculate total stats
+  const total = good + neutral + bad;
+
   return (
     <div>
       <h2>Give feedback</h2>
@@ -35,6 +38,7 @@ const App = () => {
       <p>Good {good}</p>
       <p>Neutral {neutral}</p>
       <p>Bad {bad}</p>
+      <p>Total Stats {total}</p>
     </div>
   )
 }
