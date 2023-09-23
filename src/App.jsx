@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import Stats from "./Stats";
 
 
 const App = () => {
@@ -42,12 +43,11 @@ const App = () => {
       </div>
 
       <h3>Statistics</h3>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>Total Stats: {total}</p>
-      <p>Average Feedback = {combinedAverage} %</p>
-      <p>Positive Feedback = {positiveFeedback} %</p>
+      <Stats 
+        good={good}
+        neutral={neutral}
+        bad={bad}
+      />
     </div>
   )
 }
