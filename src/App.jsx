@@ -22,16 +22,6 @@ const App = () => {
     setBad(bad + 1)
   };
 
-  // function to calculate total stats
-  const total = good + neutral + bad;
-
-  // function to calculate positive feedback
-  const positiveFeedback = (good / total) * 100;
-
-  // function to calculate combined average score (good: 1, neutral: 0, bad: -1)
-  const combinedAverage = 
-    total > 0 ? (good * 1 + neutral * 0 + bad * -1) / total : 0;
-
   return (
     <div>
       <h2>Give feedback</h2>
