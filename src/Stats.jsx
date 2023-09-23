@@ -14,12 +14,45 @@ const Stats = ({ good, neutral, bad }) => {
         {
             total > 0 ? (
                 <>
-                    <p>Good: {good}</p>
-                    <p>Neutral: {neutral}</p>
-                    <p>Bad: {bad}</p>
-                    <p>Total Stats: {total}</p>
-                    <p>Average Feedback = {combinedAverage} %</p>
-                    <p>Positive Feedback = {positiveFeedback} %</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>category</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Good</td>
+                                <td>{good}</td>
+                            </tr>
+                            <tr>
+                                <td>Neutral</td>
+                                <td>{neutral}</td>
+                                
+                            </tr>
+                            <tr>
+                                <td>Bad</td>
+                                <td>{bad}</td>
+
+                            </tr>
+                            <tr>
+                                <td>Total Stats</td>
+                                <td>{total}</td>
+
+                            </tr>
+                            <tr>
+                                <td>Average Feedback</td>
+                                <td>{combinedAverage.toFixed(2)}%</td>
+
+                            </tr>
+                            <tr>
+                                <td>Positive Feedback</td>
+                                <td>{positiveFeedback.toFixed(2)}%</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
                 </>
             ) : (
                 <p>No Feedback given.</p>
@@ -28,6 +61,6 @@ const Stats = ({ good, neutral, bad }) => {
         
     </div>
   )
-}
+};
 
-export default Stats
+export default Stats;
