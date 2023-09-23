@@ -11,12 +11,21 @@ const Stats = ({ good, neutral, bad }) => {
     total > 0 ? (good * 1 + neutral * 0 + bad * -1) / total : 0;
   return (
     <div>
-        <p>Good: {good}</p>
-        <p>Neutral: {neutral}</p>
-        <p>Bad: {bad}</p>
-        <p>Total Stats: {total}</p>
-        <p>Average Feedback = {combinedAverage} %</p>
-        <p>Positive Feedback = {positiveFeedback} %</p>
+        {
+            total > 0 ? (
+                <>
+                    <p>Good: {good}</p>
+                    <p>Neutral: {neutral}</p>
+                    <p>Bad: {bad}</p>
+                    <p>Total Stats: {total}</p>
+                    <p>Average Feedback = {combinedAverage} %</p>
+                    <p>Positive Feedback = {positiveFeedback} %</p>
+                </>
+            ) : (
+                <p>No Feedback given.</p>
+            )
+        }
+        
     </div>
   )
 }
