@@ -24,9 +24,6 @@ const App = () => {
   // function to calculate total stats
   const total = good + neutral + bad;
 
-  // function to calculate average feedback
-  const averageFeedback = (neutral / total) * 100;
-
   // function to calculate positive feedback
   const positiveFeedback = (good / total) * 100;
 
