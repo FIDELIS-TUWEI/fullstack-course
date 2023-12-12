@@ -1,9 +1,14 @@
+import PropTypes from 'prop-types';
 
 const Header = ({course}) => {
 
   return (
     <h1>{course.name}</h1>
   )
+};
+
+Header.propTypes = {
+  course: PropTypes.object,
 }
 
 const Part = ({ part }) => {
@@ -17,6 +22,10 @@ const Part = ({ part }) => {
       </p>
     </>
   )
+};
+
+Part.propTypes = {
+  part: PropTypes.object,
 }
 
 const Content = ({course}) => {
@@ -28,6 +37,10 @@ const Content = ({course}) => {
         
     </div>
   )
+};
+
+Content.propTypes = {
+  course: PropTypes.object,
 }
 
 const Total = ({course}) => {
@@ -40,6 +53,10 @@ const Total = ({course}) => {
         <p>Number of exercises {totalExercises}</p>
     </div>
   )
+};
+
+Total.propTypes = {
+  course: PropTypes.object,
 }
 
 const App = () => {
@@ -68,6 +85,6 @@ const App = () => {
       <Total course={course} />
     </div>
   )
-}
+};
 
-export default App
+export default App;
