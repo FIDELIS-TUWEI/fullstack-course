@@ -1,88 +1,43 @@
-import PropTypes from 'prop-types';
-
-const Header = ({course}) => {
-
-  return (
-    <h1>{course.name}</h1>
-  )
-};
-
-Header.propTypes = {
-  course: PropTypes.object,
-}
-
-const Part = ({ part }) => {
-  return (
-    <>
-      <p>
-        {part.name}
-      </p>
-      <p>
-        {part.exercises}
-      </p>
-    </>
-  )
-};
-
-Part.propTypes = {
-  part: PropTypes.object,
-}
-
-const Content = ({course}) => {
-  return (
-    <div>
-       {course.parts.map((part, index) => (
-        <Part key={index} part={part} />
-       ))}
-        
-    </div>
-  )
-};
-
-Content.propTypes = {
-  course: PropTypes.object,
-}
-
-const Total = ({course}) => {
-  const totalExercises = course.parts.reduce(
-    (total, part) => total + part.exercises,
-    0
-  )
-  return (
-    <div>
-        <p>Number of exercises {totalExercises}</p>
-    </div>
-  )
-};
-
-Total.propTypes = {
-  course: PropTypes.object,
-}
+import { useState } from "react";
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-    {
-      name: 'Fundamentals of React',
-      exercises: 10
-    },
-    {
-      name: 'Using props to pass data',
-      exercises: 7
-    },
-    {
-      name: 'State of a component',
-      exercises: 14
+  const [persons, setPersons] = useState([
+    { name: "Arto Hellas" }
+  ])
+
+  const [newName, setNewName] = useState("");
+
+  const addnames = (event) => {
+    event.preventDefault();
+
+    // check if the name already exists
+    const nameExists = persons.some(person => person.name === newName);
+
+    if (nameExists) {
+      alert(`${newName} is already added to phonebook`);
+    } else {
+      setPersons(persons.concat({ name: newName }));
+      setNewName("");
     }
-  ]
-}
+  };
+
+  const handleInputChange = (event) => {
+    setNewName(event.target.value);
+  }
 
   return (
     <div>
-      <Header course={course} />
-      <Content course={course} />
-      <Total course={course} />
+      <h2>Phonebook</h2>
+      <form onSubmit={addnames}>
+        <div>
+          Name: <input value={newName} onChange={handleInputChange} />
+        </div>
+        <div>
+          <button type="submit">Add</button>
+        </div>
+      </form>
+      <h2>Numbers</h2>
+      {persons.map(person => <div key={person.name}>{person.name}</div>)}
     </div>
   )
 };
