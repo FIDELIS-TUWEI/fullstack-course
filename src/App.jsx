@@ -7,6 +7,7 @@ const App = () => {
 
   const [newName, setNewName] = useState("");
 
+  // Function to add names to phonebook
   const addnames = (event) => {
     event.preventDefault();
 
@@ -21,6 +22,7 @@ const App = () => {
     }
   };
 
+  // function to handle input change
   const handleInputChange = (event) => {
     setNewName(event.target.value);
   }
