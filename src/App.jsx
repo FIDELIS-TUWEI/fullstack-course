@@ -22,6 +22,32 @@ Filter.propTypes = {
   handleSearch: PropTypes.func
 };
 
+// Form Component for adding names to phonebook
+const PersonForm = ({ handleFormSubmit, handleNameChange, handleNumberChange, newName, newNumber }) => {
+
+  return (
+    <form onSubmit={handleFormSubmit}>
+      <div>
+        name: <input value={newName} onChange={handleNameChange} />
+      </div>
+      <div>
+        number: <input value={newNumber} onChange={handleNumberChange} />
+      </div>
+      <div>
+        <button type="submit">add</button>
+      </div>
+    </form>
+  )
+};
+
+PersonForm.propTypes = {
+  handleFormSubmit: PropTypes.func,
+  handleNameChange: PropTypes.func,
+  handleNumberChange: PropTypes.func,
+  newName: PropTypes.string,
+  newNumber: PropTypes.string
+}
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: "Arto Hellas", number: "040-123456" },
@@ -69,7 +95,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
+        <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
+      <br />
       <h2>Add a new</h2>
       <form onSubmit={handleFormSubmit}>
         <div>
