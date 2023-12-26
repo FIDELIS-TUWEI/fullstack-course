@@ -7,9 +7,10 @@ const App = () => {
 
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Function to add names to phonebook
-  const addnames = (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
 
     // check if the name already exists
@@ -31,14 +32,14 @@ const App = () => {
 
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value);
-  }
+  };
 
   return (
     <div>
       <h2>Phonebook</h2>
       <input type="search" />
       <h2>Add a new</h2>
-      <form onSubmit={addnames}>
+      <form onSubmit={handleFormSubmit}>
         <div>
           Name: <input value={newName} onChange={handleNameChange} />
           <br />
