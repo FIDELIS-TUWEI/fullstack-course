@@ -15,7 +15,12 @@ const Filter = ({ searchTerm, handleSearch }) => {
       />
     </div>
   )
-}
+};
+
+Filter.propTypes = {
+  searchTerm: PropTypes.string,
+  handleSearch: PropTypes.func
+};
 
 const App = () => {
   const [persons, setPersons] = useState([
