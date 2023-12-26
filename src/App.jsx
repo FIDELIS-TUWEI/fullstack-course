@@ -1,4 +1,21 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
+
+
+// Filter Component for search Logic
+const Filter = ({ searchTerm, handleSearch }) => {
+
+  return (
+    <div>
+      <input 
+        type="search"
+        value={searchTerm} 
+        onChange={handleSearch} 
+        placeholder="Search..."
+      />
+    </div>
+  )
+}
 
 const App = () => {
   const [persons, setPersons] = useState([
