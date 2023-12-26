@@ -98,16 +98,12 @@ const App = () => {
         <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
       <br />
       <h2>Add a new</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          Name: <input value={newName} onChange={handleNameChange} />
-          <br />
-          Number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">Add</button>
-        </div>
-      </form>
+      <PersonForm 
+        handleFormSubmit={handleFormSubmit} handleNameChange={handleNameChange} 
+        handleNumberChange={handleNumberChange} newName={newName} 
+        newNumber={newNumber} 
+      />
+      <br />
       <h2>Numbers</h2>
       {filteredPersons.map((person) => (
         <div key={person.name}>
