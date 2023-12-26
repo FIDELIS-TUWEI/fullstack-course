@@ -46,6 +46,22 @@ PersonForm.propTypes = {
   handleNumberChange: PropTypes.func,
   newName: PropTypes.string,
   newNumber: PropTypes.string
+};
+
+// Component to render Persons
+const Persons = ({ filteredPersons }) => {
+
+  return (
+    <div>
+      {filteredPersons
+        .map(person => <p key={person.name}>{person.name} {person.number}</p>)
+      }
+    </div>
+  )
+};
+
+Persons.propTypes = {
+  filteredPersons: PropTypes.array
 }
 
 const App = () => {
