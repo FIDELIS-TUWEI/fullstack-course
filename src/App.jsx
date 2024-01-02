@@ -92,9 +92,19 @@ const App = () => {
     if (nameExists) {
       alert(`${newName} is already added to phonebook`);
     } else {
-      setPersons(persons.concat({ name: newName, number: newNumber }));
-      setNewName("");
-      setNewNumber("");
+      const newObject = {
+        name: newName,
+        number: newNumber
+      }
+
+      // add new name to phonebook
+      personService
+        .create(newObject)
+        .then(response => {
+          setPersons(persons.concat(response.data));
+          setNewName("");
+          setNewNumber("");
+        })
     }
   };
 
