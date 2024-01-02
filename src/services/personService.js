@@ -9,4 +9,9 @@ const getAll = () => {
     });
 };
 
-export default { getAll };
+// function to add names and numbers to phonebook
+const create = (newObject) => {
+    return axios.post(baseURL, newObject);
+};
+
+export default { getAll, create };
