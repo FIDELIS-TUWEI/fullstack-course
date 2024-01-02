@@ -1,6 +1,6 @@
-import axios from "axios";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import personService from "./services/personService";
 
 
 // Filter Component for search Logic
@@ -75,10 +75,10 @@ const App = () => {
 
   // Fetch data from json-server with useEffect hook
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/persons")
-      .then(response => {
-        setPersons(response.data);
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons);
       })
   }, []);
 
