@@ -50,15 +50,15 @@ PersonForm.propTypes = {
 };
 
 // Component to render Persons
-const Persons = ({ filteredPersons }) => {
+const Persons = ({ filteredPersons, handleDelete }) => {
 
   return (
     <div>
       {filteredPersons
         .map(person => (
-          <p key={person.name}>
+          <p key={person.id}>
             {person.name} {person.number} 
-            <button>Delete</button>
+            <button type="submit" onClick={() => handleDelete(person.id, person.name)}>Delete</button>
           </p>
         ))
       }
@@ -67,7 +67,8 @@ const Persons = ({ filteredPersons }) => {
 };
 
 Persons.propTypes = {
-  filteredPersons: PropTypes.array
+  filteredPersons: PropTypes.array,
+  handleDelete: PropTypes.func
 }
 
 const App = () => {
@@ -113,6 +114,22 @@ const App = () => {
     }
   };
 
+  // function to delete user
+  const handleDelete = (userId, personName) => {
+    const confirmDelete = window.confirm(`Delete ${personName}?`);
+
+    if (confirmDelete) {
+      personService
+        .deleteUser(userId)
+        .then(() => {
+          setPersons(persons.filter(person => person.id !== userId))
+        })
+        .catch(error => {
+          console.error("Error deleting person: ", error)
+        })
+    }
+  }
+
   // function to handle input change
   const handleNameChange = (event) => {
     setNewName(event.target.value);
@@ -142,7 +159,7 @@ const App = () => {
       />
       <br />
       <h2>Numbers</h2>
-      <Persons filteredPersons={filteredPersons} />
+      <Persons filteredPersons={filteredPersons} handleDelete={handleDelete} />
     </div>
   )
 };
