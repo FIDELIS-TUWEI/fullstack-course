@@ -176,6 +176,11 @@ const App = () => {
     }
   };
 
+  // Logic to update person list
+  const updatePersonsList = (updatedPerson) => {
+    setPersons(persons.map(person => (person.id === updatedPerson.id ? updatedPerson : person)));
+  };
+
   // function to delete user
   const handleDelete = (userId, personName) => {
     const confirmDelete = window.confirm(`Delete ${personName}?`);
