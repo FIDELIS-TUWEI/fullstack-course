@@ -137,6 +137,11 @@ const App = () => {
     }
   };
 
+  // Logic to find existing person
+  const findExistingPerson = (name) => {
+    return persons.find(person => person.name === name);
+  }
+
   // function to delete user
   const handleDelete = (userId, personName) => {
     const confirmDelete = window.confirm(`Delete ${personName}?`);
