@@ -186,7 +186,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
         <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
       <br />
       <h2>Add a new</h2>
