@@ -181,6 +181,12 @@ const App = () => {
     setPersons(persons.map(person => (person.id === updatedPerson.id ? updatedPerson : person)));
   };
 
+  // Logic to clear input fields 
+  const clearInputFields = () => {
+    setNewName("");
+    setNewNumber("");
+  };
+
   // function to delete user
   const handleDelete = (userId, personName) => {
     const confirmDelete = window.confirm(`Delete ${personName}?`);
