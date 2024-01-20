@@ -232,8 +232,8 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification message={successMessage} />
-      <Notification message={errorMessage} />
+      <Notification message={successMessage} type='success' />
+      <Notification message={errorMessage} type='error' />
         <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
       <br />
       <h2>Add a new</h2>
