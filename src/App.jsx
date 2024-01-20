@@ -93,47 +93,12 @@ const App = () => {
     event.preventDefault();
 
     // check if the name already exists
-    const nameExists = persons.find(person => person.name === newName);
+    const existingPerson = findExistingPerson(newName)
 
-    if (nameExists) {
-      if (nameExists.id) {
-        const confirmUpdate = window.confirm(`${newName} is already added to phonebook, replace the old number with the new one?`);
-
-        // logic to replace old number
-        if (confirmUpdate) {
-          try {
-            const updatedPerson = {
-              ...nameExists,
-              number: newNumber
-            }
-            
-            const response = await personService.editUser(nameExists.id, updatedPerson)
-  
-            setPersons(persons.map(person => (person.id === response.data.id ? response.data : person)))
-            setNewName("");
-            setNewNumber("");
-          } catch (error) {
-            console.error("Error updating person number: ", error)
-          }
-            
-        }
-      } else {
-        console.error("Error Updating person", error)
-      }
+    if (existingPerson) {
+      await handleExistingPersonUpdate(existingPerson);
     } else {
-      const newObject = {
-        name: newName,
-        number: newNumber
-      }
-
-      // add new name to phonebook
-      personService
-        .create(newObject)
-        .then(response => {
-          setPersons(persons.concat(response.data));
-          setNewName("");
-          setNewNumber("");
-        })
+      await handleNewPersonCreation()
     }
   };
 
