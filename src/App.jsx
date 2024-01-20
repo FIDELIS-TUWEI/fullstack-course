@@ -163,6 +163,19 @@ const App = () => {
     return await personService.editUser(person.id, updatedPerson);
   };
 
+  // Logic to handle new person creation
+  const handleNewPersonCreation = async () => {
+    try {
+      const newObject = { name: newName, number: newNumber };
+      const response = personService.create(newObject);
+
+      updatePersonsList(response.data);
+      clearInputFields();
+    } catch (error) {
+      console.error("Error creating new person: ", error);
+    }
+  };
+
   // function to delete user
   const handleDelete = (userId, personName) => {
     const confirmDelete = window.confirm(`Delete ${personName}?`);
