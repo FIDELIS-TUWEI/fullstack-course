@@ -142,6 +142,27 @@ const App = () => {
     return persons.find(person => person.name === name);
   }
 
+  // Logic to handle existing person update
+  const handleExistingPersonUpdate = async (existingPerson) => {
+    const confirmUpdate = window.confirm(`${existingPerson.name} is already added to phonebook, replace the old number with the new one?`);
+
+    if (confirmUpdate) {
+      try {
+        const updatedPerson = await updatePersonNumber(existingPerson)
+        updatePersonsList(updatedPerson);
+        clearInputFields();
+      } catch (error) {
+        console.error("Error updating person number: ", error);
+      }
+    }
+  };
+
+  // Logic to update person number
+  const updatePersonNumber = async (person) => {
+    const updatedPerson = { ...person, number: newNumber };
+    return await personService.editUser(person.id, updatedPerson);
+  };
+
   // function to delete user
   const handleDelete = (userId, personName) => {
     const confirmDelete = window.confirm(`Delete ${personName}?`);
