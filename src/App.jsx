@@ -72,13 +72,16 @@ Persons.propTypes = {
 };
 
 // Notification component
-const Notification = ({ message }) => {
+const Notification = ({ message, type }) => {
   if (message === null) {
     return null;
   }
 
+  // logic to determine success or error Notification display
+  const className = type === 'success' ? 'success' : 'error'
+
   return (
-    <div className="success error">
+    <div className={className}>
       {message}
     </div>
   )
@@ -86,6 +89,7 @@ const Notification = ({ message }) => {
 
 Notification.propTypes = {
   message: PropTypes.string,
+  type: PropTypes.oneOf(['success', 'error']),
 };
 
 const App = () => {
