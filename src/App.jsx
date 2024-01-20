@@ -69,7 +69,24 @@ const Persons = ({ filteredPersons, handleDelete }) => {
 Persons.propTypes = {
   filteredPersons: PropTypes.array,
   handleDelete: PropTypes.func
-}
+};
+
+// Notification component
+const Notification = ({ message }) => {
+  if (message === null) {
+    return null;
+  }
+
+  return (
+    <div className="success">
+      {message}
+    </div>
+  )
+};
+
+Notification.propTypes = {
+  message: PropTypes.string,
+};
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -77,6 +94,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null);
 
 
   // Fetch data from json-server with useEffect hook
@@ -113,7 +131,14 @@ const App = () => {
 
     if (confirmUpdate) {
       try {
-        const updatedPerson = await updatePersonNumber(existingPerson)
+        const updatedPerson = await updatePersonNumber(existingPerson);
+        setSuccessMessage(
+          `Number for ${existingPerson.name} updated succesfully`
+        );
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 5000);
+
         updatePersonsList(updatedPerson);
         clearInputFields();
       } catch (error) {
@@ -133,6 +158,12 @@ const App = () => {
     try {
       const newObject = { name: newName, number: newNumber };
       const response = personService.create(newObject);
+      setSuccessMessage(
+        `Added ${newName} to the phonebook`
+      )
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 5000);
 
       updatePersonsList(response.data);
       clearInputFields();
@@ -187,6 +218,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification message={successMessage} />
         <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
       <br />
       <h2>Add a new</h2>
