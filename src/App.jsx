@@ -89,14 +89,37 @@ const App = () => {
   }, []);
 
   // Function to add names to phonebook
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     // check if the name already exists
-    const nameExists = persons.some(person => person.name === newName);
+    const nameExists = persons.find(person => person.name === newName);
 
     if (nameExists) {
-      alert(`${newName} is already added to phonebook`);
+      if (nameExists.id) {
+        const confirmUpdate = window.confirm(`${newName} is already added to phonebook, replace the old number with the new one?`);
+
+        // logic to replace old number
+        if (confirmUpdate) {
+          try {
+            const updatedPerson = {
+              ...nameExists,
+              number: newNumber
+            }
+            
+            const response = await personService.editUser(nameExists.id, updatedPerson)
+  
+            setPersons(persons.map(person => (person.id === response.data.id ? response.data : person)))
+            setNewName("");
+            setNewNumber("");
+          } catch (error) {
+            console.error("Error updating person number: ", error)
+          }
+            
+        }
+      } else {
+        console.error("Error Updating person", error)
+      }
     } else {
       const newObject = {
         name: newName,
@@ -128,7 +151,7 @@ const App = () => {
           console.error("Error deleting person: ", error)
         })
     }
-  }
+  };
 
   // function to handle input change
   const handleNameChange = (event) => {
