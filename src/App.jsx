@@ -177,6 +177,12 @@ const App = () => {
       clearInputFields();
     } catch (error) {
       console.error("Error creating new person: ", error);
+      setErrorMessage(
+        `An Error occured when creating ${newName}`
+      );
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000);
     }
   };
 
