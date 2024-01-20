@@ -17,6 +17,14 @@ const create = (newObject) => {
 // Function to delete user from phonebook with id
 const deleteUser = (id) => {
     return axios.delete(`${baseURL}/${id}`);
+};
+
+// Function to edit user
+const editUser = (id, updatedPerson) => {
+    const request = axios.put(`${baseURL}/${id}`, updatedPerson)
+    return request.then(response => {
+        return response.data
+    });
 }
 
-export default { getAll, create, deleteUser };
+export default { getAll, create, deleteUser, editUser };
