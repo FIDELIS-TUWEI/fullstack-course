@@ -78,7 +78,7 @@ const Notification = ({ message }) => {
   }
 
   return (
-    <div className="success">
+    <div className="success error">
       {message}
     </div>
   )
@@ -95,6 +95,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
 
   // Fetch data from json-server with useEffect hook
@@ -143,6 +144,9 @@ const App = () => {
         clearInputFields();
       } catch (error) {
         console.error("Error updating person number: ", error);
+        setErrorMessage(
+          `Error while updating ${existingPerson.name} number`
+        )
       }
     }
   };
@@ -195,7 +199,13 @@ const App = () => {
         })
         .catch(error => {
           console.error("Error deleting person: ", error)
-        })
+          setErrorMessage(
+            `Error deleting ${personName}, this person was already deleted in the server`
+          )
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000)
+        });
     }
   };
 
@@ -219,6 +229,7 @@ const App = () => {
     <div>
       <h1>Phonebook</h1>
       <Notification message={successMessage} />
+      <Notification message={errorMessage} />
         <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
       <br />
       <h2>Add a new</h2>
