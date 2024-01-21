@@ -220,7 +220,7 @@ const App = () => {
         .catch(error => {
           console.error("Error deleting person: ", error)
           setErrorMessage(
-            `Error deleting ${personName}, this person was already deleted in the server`
+            `Information of ${personName}, has already deleted in the server.`
           )
           setTimeout(() => {
             setErrorMessage(null);
