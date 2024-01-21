@@ -27,8 +27,18 @@
     },
     {
       "name": "Fidelis Tuwei",
-      "number": "0769789528",
+      "number": "0104819267",
       "id": 6
+    },
+    {
+      "name": "Marcus Rashy",
+      "number": "123456789",
+      "id": 7
+    },
+    {
+      "name": "John Wick",
+      "number": "9876543210",
+      "id": 8
     }
   ]
 }

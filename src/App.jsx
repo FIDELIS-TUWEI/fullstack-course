@@ -165,16 +165,26 @@ const App = () => {
   const handleNewPersonCreation = async () => {
     try {
       const newObject = { name: newName, number: newNumber };
-      const response = personService.create(newObject);
-      setSuccessMessage(
+      const response = await personService.create(newObject);
+      
+      if (response?.data?.id) {
+        setSuccessMessage(
         `Added ${newName} to the phonebook`
-      )
-      setTimeout(() => {
-        setSuccessMessage(null)
-      }, 5000);
+        )
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000);
 
-      updatePersonsList(response.data);
-      clearInputFields();
+        updatePersonsList(response.data);
+        clearInputFields();
+      } else {
+        setErrorMessage(
+        `An Error occured when creating ${newName}`
+        );
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000);
+        }
     } catch (error) {
       console.error("Error creating new person: ", error);
       setErrorMessage(
