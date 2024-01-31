@@ -26,7 +26,7 @@ Filter.propTypes = {
 const Countries = ({ filterCountries, handleView, selectedCountry }) => {
   if (filterCountries.length > 10) {
     return <p>More than 10 countries match your search, please refine your search</p>
-  } else if ( selectedCountry) {
+  } else if (selectedCountry) {
     const country = selectedCountry;
     return (
       <div>
