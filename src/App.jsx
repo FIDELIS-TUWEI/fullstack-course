@@ -37,7 +37,7 @@ const Countries = ({ filterCountries }) => {
 };
 
 Countries.propTypes = {
-  filterCountries: PropTypes.func,
+  filterCountries: PropTypes.array,
 }
 
 const App = () => {
