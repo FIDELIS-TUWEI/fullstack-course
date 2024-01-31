@@ -22,10 +22,10 @@ Filter.propTypes = {
 };
 
 // Component to display countries
-const Countries = ({ countries }) => {
+const Countries = ({ filterCountries }) => {
   return (
     <div>
-      {countries
+      {filterCountries
         .map(country => (
           <p key={country.name.common}>
             {country.name.common}
@@ -37,7 +37,7 @@ const Countries = ({ countries }) => {
 };
 
 Countries.propTypes = {
-  countries: PropTypes.array,
+  filterCountries: PropTypes.array,
 }
 
 const App = () => {
@@ -58,12 +58,14 @@ const App = () => {
   };
 
   // Function to display searched countries
-  //const filterCountries = countries.filter(country => country.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filterCountries = countries.filter(country => 
+    country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
       <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
-      <Countries countries={countries} />
+      <Countries filterCountries={filterCountries} />
     </div>
   )
 };
