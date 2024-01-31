@@ -26,8 +26,37 @@ Filter.propTypes = {
 const Countries = ({ filterCountries }) => {
   if (filterCountries.length > 10) {
     return <p>More than 10 countries match your search, please refine your search</p>
-  };
-  
+  } else if (filterCountries.length === 1) {
+    const country = filterCountries[0];
+    return (
+      <div>
+        <h2>{country.name.common}</h2>
+        <p>Capital City: {country.capital}</p>
+        <p>Total Area Covered: {country.area}</p>
+        <p>Total Population: {country.population}</p>
+        <p>Region: {country.region}</p>
+        <p>Sub-region: {country.subregion}</p>
+        <p>Independent: {country.independent ? "Yes" : "No"}</p>
+        <p>Landlocked: {country.landlocked ? "Yes" : "No"}</p>
+        <p>Currency: 
+          {Object.entries(country.currencies).map(([currencyCode, currencyDetails]) => (
+            <li key={currencyCode}>{`${currencyDetails.name} (${currencyDetails.symbol})`}</li>
+          ))}
+        </p>
+        <img src={`https://flagcdn.com/w320/${country.cca2.toLowerCase()}.png`} alt="Country Flag" />
+        <p>Language (s):
+          {Object.entries(country.languages).map(([languageCode, languageName]) => (
+            <li key={languageCode}>
+              {languageName}
+            </li>
+          ))}
+        </p>
+        <p>Start of the Week: {country.startOfWeek}</p>
+        <p>Timezone: {country.timezones[0]}</p>
+      </div>
+    )
+  }
+
   return (
     <div>
       {filterCountries
