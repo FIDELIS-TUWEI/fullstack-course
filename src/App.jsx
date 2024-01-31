@@ -23,11 +23,11 @@ Filter.propTypes = {
 };
 
 // Component to display countries
-const Countries = ({ filterCountries }) => {
+const Countries = ({ filterCountries, handleView, selectedCountry }) => {
   if (filterCountries.length > 10) {
     return <p>More than 10 countries match your search, please refine your search</p>
-  } else if (filterCountries.length === 1) {
-    const country = filterCountries[0];
+  } else if ( selectedCountry) {
+    const country = selectedCountry;
     return (
       <div>
         <h2>{country.name.common}</h2>
@@ -55,28 +55,32 @@ const Countries = ({ filterCountries }) => {
         <p>Timezone: {country.timezones[0]}</p>
       </div>
     )
-  }
+  } else {
 
-  return (
-    <div>
-      {filterCountries
-        .map(country => (
-          <p key={country.name.common}>
-            {country.name.common}
-          </p>
-        ))
-      }
+    return (
+      <div>
+        {filterCountries
+          .map(country => (
+            <div key={country.name.common}>
+              <p>{country.name.common}</p>
+              <button onClick={() => handleView(`${country.name.common}`)}>View</button>
+            </div>
+          ))
+        }
     </div>
-  )
+  )}
 };
 
 Countries.propTypes = {
   filterCountries: PropTypes.array,
+  handleView: PropTypes.func,
+  selectedCountry: PropTypes.object
 }
 
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   // Function to fetch countries
   useEffect(() => {
@@ -96,10 +100,22 @@ const App = () => {
     country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
   ).slice(0, 10);
 
+  // Function to view Country details
+  const handleView = (name) => {
+    countryService
+      .getCountryByName(name)
+      .then((data) => {
+        setSelectedCountry(data);
+      })
+      .catch(error => {
+        console.log("Error:", error);
+      })
+  }
+
   return (
     <div>
       <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
-      <Countries filterCountries={filterCountries} />
+      <Countries filterCountries={filterCountries} handleView={handleView} selectedCountry={selectedCountry} />
     </div>
   )
 };
