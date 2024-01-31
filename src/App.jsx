@@ -6,6 +6,7 @@ import countryService from './services/countryService';
 const Filter = ({ searchTerm, handleSearch }) => {
   return (
     <div>
+      <h3>Find Countries</h3>
       <input 
         type='searchTerm' 
         value={searchTerm} 
@@ -23,6 +24,10 @@ Filter.propTypes = {
 
 // Component to display countries
 const Countries = ({ filterCountries }) => {
+  if (filterCountries.length > 10) {
+    return <p>More than 10 countries match your search, please refine your search</p>
+  };
+  
   return (
     <div>
       {filterCountries
@@ -60,7 +65,7 @@ const App = () => {
   // Function to display searched countries
   const filterCountries = countries.filter(country => 
     country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  ).slice(0, 10);
 
   return (
     <div>
