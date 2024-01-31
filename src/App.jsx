@@ -1,30 +1,69 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import countryService from './services/countryService';
 
 // Search component
-const Filter = ({ search, handleSearch }) => {
+const Filter = ({ searchTerm, handleSearch }) => {
   return (
     <div>
-      <input type='search' onChange={handleSearch} />
+      <input 
+        type='searchTerm' 
+        value={searchTerm} 
+        onChange={handleSearch} 
+        placeholder='Search...'
+      />
     </div>
   )
 };
 
 Filter.propTypes = {
-  search: PropTypes.string,
+  searchTerm: PropTypes.string,
   handleSearch: PropTypes.func
+};
+
+// Component to display countries
+const Countries = ({ filterCountries }) => {
+  return (
+    <div>
+      {filterCountries
+        .map(country => (
+          <p key={country.name}>
+            {country.name}
+          </p>
+        ))
+      }
+    </div>
+  )
+};
+
+Countries.propTypes = {
+  filterCountries: PropTypes.func,
 }
 
 const App = () => {
-  const [search, setSearch] = useState("");
+  const [countries, setCountries] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Function to fetch countries
+  useEffect(() => {
+    countryService
+      .getCountries()
+      .then(prevState => {
+        setCountries(prevState)
+      });
+  }, []);
 
   const handleSearch = (event) => {
-    setSearch(event.target.value);
-  }
+    setSearchTerm(event.target.value);
+  };
+
+  // Function to display searched countries
+  const filterCountries = countries.filter(country => country.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()))
 
   return (
     <div>
-      <Filter search={search} handleSearch={handleSearch} />
+      <Filter searchTerm={searchTerm} handleSearch={handleSearch} />
+      <Countries filterCountries={filterCountries} />
     </div>
   )
 };
