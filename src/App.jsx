@@ -84,13 +84,13 @@ const Notification = ({ message, type }) => {
     <div className={className}>
       {message}
     </div>
-  )}
+  )
 };
 
 Notification.propTypes = {
   message: PropTypes.string,
   type: PropTypes.oneOf(['success', 'error']),
-};
+}
 
 const App = () => {
   const [persons, setPersons] = useState([]);
