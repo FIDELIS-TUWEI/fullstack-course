@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "/api/persons";
+const baseURL = import.meta.env.VITE_SERVER_URL
 
 // function to get all persons from json-server
 const getAll = () => {
