@@ -90,7 +90,7 @@ const Notification = ({ message, type }) => {
 Notification.propTypes = {
   message: PropTypes.string,
   type: PropTypes.oneOf(['success', 'error']),
-};
+}
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -186,10 +186,8 @@ const App = () => {
         }, 5000);
         }
     } catch (error) {
-      console.error("Error creating new person: ", error);
-      setErrorMessage(
-        `An Error occured when creating ${newName}`
-      );
+      console.error("Error creating new person: ", error.response.data.errors);
+      setErrorMessage(error.response.data.errors);
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000);
