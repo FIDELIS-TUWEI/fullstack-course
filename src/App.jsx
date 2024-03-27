@@ -127,7 +127,7 @@ const App = () => {
 
   // Logic to find existing person
   const findExistingPerson = (name) => {
-    return persons.find(person => person.name === name);
+    return Array.isArray(persons) ? persons.find(person => person.name === name) : [];
   }
 
   // Logic to handle existing person update
