@@ -241,7 +241,7 @@ const App = () => {
   };
 
   // Function to filter persons by name
-  const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredPersons = Array.isArray(persons) ? persons.filter(person => person.name.toLowerCase().includes(searchTerm.toLowerCase())) : [];
 
   return (
     <div>
