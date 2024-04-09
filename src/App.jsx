@@ -178,6 +178,7 @@ const App = () => {
         updatePersonsList(response.data);
         clearInputFields();
       } else {
+        console.error("An error occurred when creating a new person:", response);
         setErrorMessage(
         `An Error occured when creating ${newName}`
         );
@@ -187,7 +188,7 @@ const App = () => {
         }
     } catch (error) {
       console.error("Error creating new person: ", error.response.data.errors);
-      setErrorMessage(error.response.data.errors);
+      setErrorMessage(error.response.data.errors[0]);
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000);
